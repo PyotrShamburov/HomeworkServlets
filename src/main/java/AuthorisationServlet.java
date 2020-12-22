@@ -13,22 +13,26 @@ public class AuthorisationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Pattern pattern = Pattern.compile("\\w+");
-        String login = req.getParameter("login").trim();
-        String password = req.getParameter("password").trim();
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
         User user = inMemoryStorage.getUserByLogin(login);
-        if (pattern.matcher(login).matches() && pattern.matcher(password).matches()) {
-            if (user != null) {
-                if (user.getPassword().equals(password)) {
-                    req.getSession().setAttribute("user", user);
-                    resp.getWriter().print("Authorisation passed successful!");
+        if (login != null && password != null) {
+            if (pattern.matcher(login).matches() && pattern.matcher(password).matches()) {
+                if (user != null) {
+                    if (user.getPassword().equals(password)) {
+                        req.getSession().setAttribute("user", user);
+                        resp.getWriter().print("Authorisation passed successful!");
+                    } else {
+                        resp.getWriter().print("Your password is wrong!");
+                    }
                 } else {
-                    resp.getWriter().print("Your password is wrong!");
+                    resp.getWriter().print("User with this login doesn't exist!");
                 }
             } else {
-                resp.getWriter().print("User with this login doesn't exist!");
+                resp.getWriter().print("Wrong symbols for login or password!");
             }
-        }else{
-            resp.getWriter().print("Wrong symbols for login or password!");
+        } else {
+            resp.getWriter().print("Login or password field can't be empty!");
         }
     }
 }

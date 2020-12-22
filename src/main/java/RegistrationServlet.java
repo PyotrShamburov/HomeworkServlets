@@ -16,17 +16,21 @@ public class RegistrationServlet extends HttpServlet {
         String userName = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (userName.matches("(\\p{Upper}?)(\\p{Lower}+)") && pattern.matcher(userName).matches() &&
-                pattern.matcher(password).matches()) {
-            if (inMemoryStorage.getUserByLogin(login) == null) {
-                User user = new User(userName, login, password);
-                inMemoryStorage.saveUser(user);
-                resp.getWriter().print("Registration passed successful!");
+        if (userName != null && login != null && password != null) {
+            if (userName.matches("(\\p{Upper}?)(\\p{Lower}+)") && pattern.matcher(userName).matches() &&
+                    pattern.matcher(password).matches()) {
+                if (inMemoryStorage.getUserByLogin(login) == null) {
+                    User user = new User(userName, login, password);
+                    inMemoryStorage.saveUser(user);
+                    resp.getWriter().print("Registration passed successful!");
+                } else {
+                    resp.getWriter().print("User with this login already exists!");
+                }
             } else {
-                resp.getWriter().print("User with this login already exists!");
+                resp.getWriter().print("Wrong symbols for login or password or user's name!");
             }
-        }else{
-            resp.getWriter().print("Wrong symbols for login or password or user's name!");
+        } else {
+            resp.getWriter().print("Name, login or password field can't be empty!");
         }
     }
 }
