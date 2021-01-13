@@ -1,3 +1,8 @@
+package servlets;
+
+import model.User;
+import storage.InMemoryStorage;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +15,22 @@ import java.io.IOException;
 public class ShowAllUsersServlet extends HttpServlet {
     private InMemoryStorage inMemoryStorage = new InMemoryStorage();
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
+        String users = "";
         if (user!=null){
-            resp.getWriter().print("Users of system: \n");
-            for (User u: inMemoryStorage.getUsers()){
-                resp.getWriter().print("ID: "+u.getId()+", Name: "+u.getUserName()+", Login: "+u.getLogin()+".\n");
-            }
+               for (User u: inMemoryStorage.getUsers()){
+                   users+=("ID: " +u.getId()+", Name: " +u.getUserName()+", Login: " +u.getLogin()+".<br>");
+               }
+               req.setAttribute("result",users);
+                getServletContext().getRequestDispatcher("/pages/users.jsp").forward(req,resp);
         }else {
-            resp.getWriter().print("Guests can't see users of the system!");
+            req.setAttribute("result","Guests can't see users of the system!");
+            getServletContext().getRequestDispatcher("/pages/users.jsp").forward(req,resp);
         }
+
 
 
     }
