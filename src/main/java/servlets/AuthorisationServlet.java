@@ -17,25 +17,25 @@ public class AuthorisationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/pages/authorisation.jsp").forward(req,resp);
+        getServletContext().getRequestDispatcher("/pages/authorisation.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Pattern pattern = Pattern.compile("\\w+");
+        Pattern pattern = Pattern.compile("\\w{2,15}");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         User user = inMemoryStorage.getUserByLogin(login);
         User userActive = (User) req.getSession().getAttribute("user");
-        if (userActive==null) {
-            if (login != null && password != null) {
+        if (userActive == null) {
+            if (!login.isEmpty() && !password.isEmpty()) {
                 if (pattern.matcher(login).matches() && pattern.matcher(password).matches()) {
                     if (user != null) {
                         if (user.getPassword().equals(password)) {
                             req.getSession().setAttribute("user", user);
                             resp.sendRedirect("/");
                         } else {
-                            req.setAttribute("result", "Your password is wrong!");
+                            req.setAttribute("result", "Your password or login is wrong!");
                             getServletContext().getRequestDispatcher("/pages/authorisation.jsp").forward(req, resp);
                         }
                     } else {
@@ -50,10 +50,9 @@ public class AuthorisationServlet extends HttpServlet {
                 req.setAttribute("result", "Login or password field can't be empty!");
                 getServletContext().getRequestDispatcher("/pages/authorisation.jsp").forward(req, resp);
             }
-        }else{
+        } else {
             req.setAttribute("result", "You already authorized your profile!");
             getServletContext().getRequestDispatcher("/pages/authorisation.jsp").forward(req, resp);
         }
-
     }
 }

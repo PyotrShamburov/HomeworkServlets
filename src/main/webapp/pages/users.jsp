@@ -5,7 +5,6 @@
 </head>
 <body>
 <h1 style="font-size: medium">List users of system!</h1>
-<form action="/all" method="get"></form>
 <p>${requestScope.result}</p>
 <a href="/">Return to homepage</a><br>
 </body>
