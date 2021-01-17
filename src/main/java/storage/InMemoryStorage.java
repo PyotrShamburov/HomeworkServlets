@@ -23,6 +23,6 @@ public class InMemoryStorage {
     }
 
     public List<User> getUsers() {
-        return users;
+        return new ArrayList<>(users);
     }
 }

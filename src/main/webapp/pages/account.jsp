@@ -4,9 +4,17 @@
     <title>Account</title>
 </head>
 <body>
-<h1 style="font-size: medium">Your personal data information!</h1>
-<p>${requestScope.result}</p><br>
-<a href="/">Return to homepage</a><br>
-<a href="/out">Logout</a>
+<jsp:include page="_header.jsp"/>
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Profile information:
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${requestScope.userId}</li>
+        <li class="list-group-item">Name: ${requestScope.userName}</li>
+        <li class="list-group-item">Login: ${requestScope.userLogin}</li>
+        <li class="list-group-item">Password: ${requestScope.userPassword}</li>
+    </ul>
+</div>
 </body>
 </html>

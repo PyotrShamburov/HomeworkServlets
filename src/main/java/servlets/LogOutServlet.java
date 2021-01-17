@@ -9,20 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/out")
+@WebServlet(urlPatterns = "/user/out", name = "LogOutServlet")
 public class LogOutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("user");
-        if (user!=null){
-            req.getSession().invalidate();
-            req.setAttribute("result","Your session has been closed!");
-        }else{
-            req.setAttribute("result","You didn't start you session, for closing!");
-        }
-        getServletContext().getRequestDispatcher("/pages/logout.jsp").forward(req,resp);
-
-
+        req.getSession().invalidate();
+        resp.sendRedirect("/");
     }
 }

@@ -14,13 +14,11 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user =(User) req.getSession().getAttribute("user");
-        if (user!= null){
-            req.setAttribute("name",user.getUserName());
-        }else{
-            req.setAttribute("name","Guest");
+        if(req.getSession().getAttribute("user")!=null) {
+            User user = (User) req.getSession().getAttribute("user");
+            req.setAttribute("name", user.getUserName());
         }
-        getServletContext().getRequestDispatcher("/pages/home.jsp").forward(req,resp);
+        getServletContext().getRequestDispatcher("/pages/home.jsp").forward(req, resp);
 
     }
 }

@@ -4,17 +4,25 @@
     <title>Registration</title>
 </head>
 <body>
-<h1 style="font-size: medium">Registration new user!</h1>
-<form action="/reg" method="post">
-    <input type="text" name="name" placeholder="Name">
-    <br>
-    <input type="text" name="login" placeholder="Login">
-    <br>
-    <input type="text" name="password" placeholder="Password">
-    <br>
-    <button>Register</button>
+<jsp:include page="_header.jsp"/>
+<form class="row g-3 needs-validation" novalidate action="/reg" method="post">
+    <div class="col-md-3" style="width: 15%">
+        <label class="form-label">Name: </label>
+        <input type="text" class="form-control" name="name">
+    </div>
+    <div class="col-md-3" style="width: 15%">
+        <label class="form-label" >Login: </label>
+        <input type="text" class="form-control" name="login">
+    </div>
+    <div class="col-md-3" style="width: 15%">
+        <label class="form-label" >Password: </label>
+        <input type="text" class="form-control" name="password">
+    </div>
+    <label style="color: red">${requestScope.result}</label>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Register</button>
+    </div>
+    <p class="text-start">After registration you will redirect to authorisation page!</p>
 </form>
-${requestScope.result}<br>
-<a href="/">Return to homepage!</a>
 </body>
 </html>
