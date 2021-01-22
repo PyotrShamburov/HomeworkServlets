@@ -1,6 +1,7 @@
 package servlets;
 
-import model.User;
+import model.Author;
+import model.Book;
 import storage.InMemoryBookStorage;
 
 import javax.servlet.ServletException;
@@ -10,17 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/")
-public class HomeServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/author/view")
+public class AuthorViewServlet extends HttpServlet {
     private InMemoryBookStorage inMemoryBookStorage = InMemoryBookStorage.getInstance();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("books",inMemoryBookStorage.getAll());
-        if(req.getSession().getAttribute("user")!=null) {
-            User user = (User) req.getSession().getAttribute("user");
-            req.setAttribute("name", user.getUserName());
-        }
-        getServletContext().getRequestDispatcher("/pages/home.jsp").forward(req, resp);
+        Book byId = inMemoryBookStorage.getById(Integer.parseInt(req.getParameter("id")));
+        Author author = byId.getAuthor();
+        req.setAttribute("author",author);
+        getServletContext().getRequestDispatcher("/pages/authorView.jsp").forward(req,resp);
     }
 }

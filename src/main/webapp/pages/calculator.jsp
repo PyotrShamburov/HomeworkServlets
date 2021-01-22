@@ -5,6 +5,17 @@
 </head>
 <body>
 <jsp:include page="_header.jsp"/>
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Calculator functions:
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">"sum": summing. </li>
+        <li class="list-group-item">"dif": difference.</li>
+        <li class="list-group-item">"mul": multiplication.</li>
+        <li class="list-group-item">"div": division.</li>
+    </ul>
+</div>
 <form class="row g-3 needs-validation" novalidate action="/user/calc" method="post">
     <div class="col-md-3" style="width: 15%">
         <label class="form-label">Number 1: </label>

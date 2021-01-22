@@ -5,7 +5,7 @@ import model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryStorage {
+public class InMemoryUserStorage {
     private static List<User> users = new ArrayList<>();
     private static int userId = 1;
 
