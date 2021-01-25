@@ -8,10 +8,13 @@
 </head>
 <body>
 <ul class="nav nav-pills">
-    <c:if test="${sessionScope.user == null}">
-        <li class="nav-item">
-            <a class="nav-link" style="font-size: medium" href="/">Home</a>
-        </li>
+    <li class="nav-item">
+        <a class="nav-link" style="font-size: medium" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" style="font-size: medium" href="/authors">Authors</a>
+    </li>
+    <c:if test="${sessionScope.isGuest}">
         <li class="nav-item">
             <a class="nav-link" style="font-size: medium" href="/reg">Registration</a>
         </li>
@@ -22,18 +25,30 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Hello, Guest!</a>
         </li>
     </c:if>
-    <c:if test="${sessionScope.user != null}">
+    <c:if test="${sessionScope.isUser}">
         <li class="nav-item">
-            <a class="nav-link" style="font-size: medium" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="font-size: medium" href="/user/account">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="font-size: medium" href="/user/all">Users</a>
+            <a class="nav-link" style="font-size: medium" href="/user/account">Profile
+                <span class="badge bg-primary rounded-pill">${sessionScope.basket.amount}</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" style="font-size: medium" href="/user/calc">Calculator</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="font-size: medium" href="/user/out">Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" style="font-size: medium" href="#" tabindex="-1" aria-disabled="true">Hello, ${sessionScope.user.userName}!</a>
+        </li>
+    </c:if>
+    <c:if test="${sessionScope.isAdmin}">
+        <li class="nav-item">
+            <a class="nav-link" style="font-size: medium" href="/admin/book/add">Add Book</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="font-size: medium" href="/admin/author/add">Add Author</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="font-size: medium" href="/user/all">Users</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" style="font-size: medium" href="/user/out">Logout</a>

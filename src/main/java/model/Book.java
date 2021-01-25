@@ -9,30 +9,26 @@ public class Book {
     private Author author;
     private int yearOfPublishing;
     private double price;
+    private String url;
 
     public Book() {
     }
 
-    public Book(int id) {
-        this.id = id;
-    }
-
-    public Book(int id, String title) {
-        this.id = id;
-        this.title = title;
-    }
-
-    public Book(int id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-    }
-
-    public Book(int id, String title, String description, Author author) {
-        this.id = id;
+    public Book(String title, String description, Author author, int yearOfPublishing, double price, String url) {
         this.title = title;
         this.description = description;
         this.author = author;
+        this.yearOfPublishing = yearOfPublishing;
+        this.price = price;
+        this.url = url;
+    }
+
+    public Book(String title, String description, int yearOfPublishing, double price, String url) {
+        this.title = title;
+        this.description = description;
+        this.yearOfPublishing = yearOfPublishing;
+        this.price = price;
+        this.url = url;
     }
 
     public Book(int id, String title, String description, Author author, int yearOfPublishing) {
@@ -43,13 +39,15 @@ public class Book {
         this.yearOfPublishing = yearOfPublishing;
     }
 
-    public Book(int id, String title, String description, Author author, int yearOfPublishing, double price) {
+
+    public Book(int id, String title, String description, Author author, int yearOfPublishing, double price, String url) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.author = author;
         this.yearOfPublishing = yearOfPublishing;
         this.price = price;
+        this.url = url;
     }
 
     public int getId() {
@@ -98,6 +96,14 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

@@ -15,10 +15,11 @@ public class AccountFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getSession().getAttribute("user") == null){
+        boolean isGuest = (boolean) req.getSession().getAttribute("isGuest");
+        if (isGuest){
              if (req.getMethod().equals("POST")){
-                Pattern pattern = Pattern.compile("\\w{2,15}");
-                Pattern patternName = Pattern.compile("(\\p{Upper}?)(\\p{Lower}{2,15})");
+                Pattern pattern = Pattern.compile("\\w{3,15}");
+                Pattern patternName = Pattern.compile("(\\p{Upper}?)(\\p{Lower}{3,15})");
                 String userName = req.getParameter("name");
                 String login = req.getParameter("login");
                 String password = req.getParameter("password");

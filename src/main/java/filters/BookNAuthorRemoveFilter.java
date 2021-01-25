@@ -8,14 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(servletNames = {"AccountServlet","LogOutServlet"})
-public class AccountLogOutFilter extends HttpFilter {
+@WebFilter(servletNames = {"RemoveBookServlet","AuthorRemoveServlet"})
+public class BookNAuthorRemoveFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getSession().getAttribute("user") != null){
-            chain.doFilter(req,res);
-        }else{
+        boolean isAdmin = (boolean) req.getSession().getAttribute("isAdmin");
+        if (isAdmin) {
+            if (req.getMethod().equals("POST")) {
+                chain.doFilter(req, res);
+            } else {
+                res.sendRedirect("/");
+            }
+        } else {
             res.sendRedirect("/");
         }
     }

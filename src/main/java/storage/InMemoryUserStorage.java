@@ -1,5 +1,6 @@
 package storage;
 
+import model.Role;
 import model.User;
 
 import java.util.ArrayList;
@@ -9,6 +10,9 @@ public class InMemoryUserStorage {
     private static List<User> users = new ArrayList<>();
     private static int userId = 1;
 
+    static {
+        users.add(new User("Admin","admin","admin", Role.ADMIN));
+    }
     public void saveUser(User user){
         user.setId(userId++);
         users.add(user);

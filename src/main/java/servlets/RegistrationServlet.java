@@ -1,5 +1,6 @@
 package servlets;
 
+import model.Role;
 import model.User;
 import storage.InMemoryUserStorage;
 
@@ -25,7 +26,7 @@ public class RegistrationServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (inMemoryUserStorage.getUserByLogin(login) == null) {
-            User user = new User(userName, login, password);
+            User user = new User(userName, login, password,Role.USER);
             inMemoryUserStorage.saveUser(user);
             resp.sendRedirect("/enter");
         } else {

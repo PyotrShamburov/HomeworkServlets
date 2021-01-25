@@ -1,5 +1,6 @@
 package servlets;
 
+import model.Role;
 import model.User;
 import storage.InMemoryUserStorage;
 
@@ -27,6 +28,12 @@ public class AuthorisationServlet extends HttpServlet {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 req.getSession().setAttribute("user", user);
+                req.getSession().setAttribute("isUser",true);
+                req.getSession().setAttribute("isGuest",false);
+                if (user.getRole().equals(Role.ADMIN)){
+                    req.getSession().setAttribute("isUser",false);
+                    req.getSession().setAttribute("isAdmin",true);
+                }
                 resp.sendRedirect("/");
             } else {
                 req.setAttribute("result", "Your password or login is wrong!");

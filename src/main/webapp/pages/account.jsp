@@ -23,8 +23,12 @@
     Basket:
 </div>
     <ul>
-        <c:forEach items="${sessionScope.basket.getAll()}" var="book">
-            <li><a href="/book/view?id=${book.id}">${book.title}</a></li>
+        <c:forEach items="${sessionScope.basket.all}" var="book">
+            <div class="col-auto">
+                <li>
+                    <label ><a href="/book/view?id=${book.id}">${book.title}</a></label>
+                </li>
+            </div>
         </c:forEach>
     </ul>
 </div>

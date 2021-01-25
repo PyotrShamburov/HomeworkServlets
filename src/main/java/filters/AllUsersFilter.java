@@ -13,7 +13,8 @@ public class AllUsersFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getSession().getAttribute("user")!= null){
+        boolean isAdmin = (boolean) req.getSession().getAttribute("isAdmin");
+        if (isAdmin){
             chain.doFilter(req,res);
         }else{
             res.sendRedirect("/");

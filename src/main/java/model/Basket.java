@@ -12,4 +12,12 @@ public class Basket {
     public List<Book> getAll(){
         return new ArrayList<>(books);
     }
+    public int getAmount(){
+        return new ArrayList<>(books).size();
+    }
+    public void removeBook(Book book){
+        if (books.size()!=0){
+            books.remove(book);
+        }
+    }
 }

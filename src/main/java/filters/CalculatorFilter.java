@@ -14,7 +14,8 @@ public class CalculatorFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getSession().getAttribute("user") != null){
+        boolean isUser = (boolean) req.getSession().getAttribute("isUser");
+        if (isUser){
             if (req.getMethod().equals("POST")){
                 Pattern pattern = Pattern.compile("(\\-?)(\\d+)");
                 String num1 = req.getParameter("num1");

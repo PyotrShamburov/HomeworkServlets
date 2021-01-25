@@ -12,5 +12,9 @@ public class Listener implements ServletContextListener, HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         se.getSession().setAttribute("basket",new Basket());
+        se.getSession().setAttribute("isGuest",true);
+        se.getSession().setAttribute("isUser",false);
+        se.getSession().setAttribute("isAdmin",false);
     }
+
 }

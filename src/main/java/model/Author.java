@@ -10,18 +10,16 @@ public class Author {
     private String lastName;
     private String description;
     private List<Book> books = new ArrayList<>();
+    private String urlPhoto;
 
     public Author() {
     }
 
-    public Author(int id) {
-        this.id = id;
-    }
-
-    public Author(int id, String firstName, String lastName) {
-        this.id = id;
+    public Author(String firstName, String lastName, String description, String urlPhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.description = description;
+        this.urlPhoto = urlPhoto;
     }
 
     public Author(int id, String firstName, String lastName, String description) {
@@ -29,6 +27,14 @@ public class Author {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
+    }
+
+    public Author(int id, String firstName, String lastName, String description, String urlPhoto) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.urlPhoto = urlPhoto;
     }
 
     public int getId() {
@@ -71,6 +77,17 @@ public class Author {
         if (!books.contains(book)) {
             books.add(book);
         }
+    }
+    public void deleteBook(Book book){
+        books.remove(book);
+    }
+
+    public String getUrlPhoto() {
+        return urlPhoto;
+    }
+
+    public void setUrlPhoto(String urlPhoto) {
+        this.urlPhoto = urlPhoto;
     }
 
     @Override

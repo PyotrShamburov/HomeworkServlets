@@ -17,7 +17,8 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("books",inMemoryBookStorage.getAll());
-        if(req.getSession().getAttribute("user")!=null) {
+        boolean isUser = (boolean) req.getSession().getAttribute("isUser");
+        if(isUser) {
             User user = (User) req.getSession().getAttribute("user");
             req.setAttribute("name", user.getUserName());
         }

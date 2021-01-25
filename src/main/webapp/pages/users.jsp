@@ -6,16 +6,15 @@
 </head>
 <body>
 <jsp:include page="_header.jsp"/>
-<div class="container" >
-    <ul class="list-group" style="width: 30%">
-        <h4><span class="badge bg-secondary">Users of system: </span></h4>
-        <c:forEach items="${requestScope.users}" var="user">
-            <li class="list-group-item" style="text-align: center">
-                ${user.userName} (${user.login})
-            </li>
-        </c:forEach>
-    </ul>
+<div class="list-group" style="width: 25%" style="text-align: center">
+<c:forEach items="${requestScope.users}" var="user">
+    <a class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">User Id: <b>${user.id}</b></h5>
+        </div>
+        <p class="mb-1">Name: ${user.userName}<br>
+            Login: ${user.login} </p>
+        <small class="text-muted">Password: ${user.password}</small>
+    </a>
+</c:forEach>
 </div>
-<p>${requestScope.result}</p>
-</body>
-</html>

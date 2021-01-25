@@ -12,7 +12,8 @@ import java.io.IOException;
 public class BasketFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getSession().getAttribute("user") != null) {
+        boolean isUser = (boolean) req.getSession().getAttribute("isUser");
+        if (isUser) {
             if (req.getMethod().equals("GET")){
                 res.sendRedirect("/");
             }else{
